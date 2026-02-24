@@ -4,13 +4,13 @@ from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher, Router, types
 
+from handlers import register_routes
+
 load_dotenv()  # ← ВАЖНО
 
 router = Router()
 
 TOKEN = os.getenv("BOT_TOKEN")
-print(TOKEN)
-
 
 @router.message()
 async def start(message: types.Message):
@@ -21,7 +21,7 @@ async def main():
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
 
-    dp.include_router(router)
+    register_routes(dp)
     await dp.start_polling(bot)
 
 
